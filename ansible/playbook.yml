@@ -1,0 +1,69 @@
+ - hosts: 192.168.1.15
+   become: yes
+   tasks:
+     - name: Update and upgrade system packages
+       apt:
+         name: aptitude
+         state: latest
+         update_cache: true
+      
+     - name: Add Docker GPG apt key
+       apt_key:
+         url: https://download.docker.com/linux/ubuntu/gpg
+         state: present
+     
+     - name: Add Docker Repository
+       apt_repository:
+         repo: deb https://download.docker.com/linux/ubuntu focal stable
+         state: present
+
+     - name: Update Repository and install docker-ce
+       apt:
+         name: docker-ce
+         state: latest
+         update_cache: true
+
+     - name: Installing jdk-11
+       apt:
+         name: openjdk-11-jdk
+         state: present
+    
+     - name: Add jenkins GPG apt key
+       jenkins_apt_key:
+         url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+         state: present
+     
+     - name: Add jenkins to Repository
+       jenkins_add_repository:
+         repo: deb https://pkg.jenkins.io/debian-stable binary/
+         state: present
+
+     - name: Install jenkins
+       apt:
+         name: jenkins
+         state: present
+
+     - name: start jenkins and docker services
+       services:
+         name:
+           - jenkins
+           - docker
+         state: started
+
+     - name: Configuring system firewall
+       firewalld:
+         service: ssh
+         permanent: true
+         state: enabled
+
+     - name: Configuring system firewall
+       firewalld:
+         service: http
+         permanent: true
+         state: enabled
+
+     - name: Configuring system firewall
+       firewalld:
+         service: https
+         permanent: true
+         state: enabled
