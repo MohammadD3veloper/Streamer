@@ -1,0 +1,4 @@
+-r base.txt
+
+gunicorn==21.2.0
+uvicorn==0.24.0.post1

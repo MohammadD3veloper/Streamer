@@ -1,0 +1,4 @@
+Django==4.2.7
+django-channels==0.7.0
+djangorestframework==3.14.0
+pytest-django==4.7.0

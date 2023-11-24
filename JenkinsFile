@@ -2,10 +2,16 @@ pipeline {
     agent any
 
     stages {
+        stage('Build') {
+            steps {
+                echo '[*] Building docker image ...'
+                sh "docker build -t streamer:latest"
+            }
+        }
         stage('Lint') {
             steps {
                 echo '[*] Running Linter ...'
-                sh "docker-compose run django sh -c 'flake8 .'"
+                sh "docker-compose run django sh -c 'flake8 stramer/'"
             }
         }
         stage('Test') {

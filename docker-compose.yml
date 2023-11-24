@@ -2,9 +2,7 @@ version: "3.9"
 
 services:
   django:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: streamer:latest
     command: gunicorn -b 0.0.0.0 -p 8000 config.wsgi:application
     volumes:
       - "./:/Streamer"
@@ -15,9 +13,7 @@ services:
     network_mode: host
 
   celery:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: streamer:latest
     command: celery -A config worker -l INFO
     volumes:
       - "./:Streamer"
