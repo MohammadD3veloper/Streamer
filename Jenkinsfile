@@ -1,7 +1,12 @@
 pipeline {
     agent any
-
     stages {
+        stage('Checkout') {
+            steps {
+                echo '[*] Getting updated files'
+                sh "git clone https://github.com/MohammadD3veloper/Streamer"
+            }
+        }
         stage('Build') {
             steps {
                 echo '[*] Building docker image ...'
