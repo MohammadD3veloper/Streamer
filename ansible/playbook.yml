@@ -1,69 +1,76 @@
- - hosts: 192.168.1.15
-   become: yes
-   tasks:
-     - name: Update and upgrade system packages
-       apt:
-         name: aptitude
-         state: latest
-         update_cache: true
-      
-     - name: Add Docker GPG apt key
-       apt_key:
-         url: https://download.docker.com/linux/ubuntu/gpg
-         state: present
-     
-     - name: Add Docker Repository
-       apt_repository:
-         repo: deb https://download.docker.com/linux/ubuntu focal stable
-         state: present
+- hosts: 172.104.148.48
+  become: true
+  vars:
+    # (shecan) just for local servers
+    dns_servers:
+      - 178.22.122.100
+      - 185.51.200.2
+    services_to_start:
+      - jenkins
+      - docker
+    packages_to_install:
+      - python3-pip
+      - python3-virtualenv
 
-     - name: Update Repository and install docker-ce
-       apt:
-         name: docker-ce
-         state: latest
-         update_cache: true
+  tasks:
+    - name: Update and upgrade system packages
+      ansible.builtin.apt:
+        name: aptitude
+        state: present
+        update_cache: true
 
-     - name: Installing jdk-11
-       apt:
-         name: openjdk-11-jdk
-         state: present
-    
-     - name: Add jenkins GPG apt key
-       jenkins_apt_key:
-         url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
-         state: present
-     
-     - name: Add jenkins to Repository
-       jenkins_add_repository:
-         repo: deb https://pkg.jenkins.io/debian-stable binary/
-         state: present
+    - name: Installing required packages
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+      with_items: "{{ packages_to_install }}"
 
-     - name: Install jenkins
-       apt:
-         name: jenkins
-         state: present
+    - name: Add Docker GPG apt key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
 
-     - name: start jenkins and docker services
-       services:
-         name:
-           - jenkins
-           - docker
-         state: started
+    - name: Add Docker Repository
+      ansible.builtin.apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
 
-     - name: Configuring system firewall
-       firewalld:
-         service: ssh
-         permanent: true
-         state: enabled
+    - name: Update Repository and install docker-ce
+      ansible.builtin.apt:
+        name: docker-ce
+        state: present
+        update_cache: true
 
-     - name: Configuring system firewall
-       firewalld:
-         service: http
-         permanent: true
-         state: enabled
+    - name: Installing jdk-11
+      ansible.builtin.apt:
+        name: openjdk-11-jdk
+        state: present
 
-     - name: Configuring system firewall
-       firewalld:
-         service: https
-         permanent: true
-         state: enabled
+    - name: Add jenkins GPG apt key
+      ansible.builtin.apt_key:
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+        state: present
+
+    - name: Add jenkins to Repository
+      ansible.builtin.apt_repository:
+        repo: deb https://pkg.jenkins.io/debian-stable binary/
+        state: present
+
+    - name: Install jenkins
+      ansible.builtin.apt:
+        name: jenkins
+        state: present
+
+    - name: Start jenkins and docker services
+      ansible.builtin.systemd:
+        name: "{{ item }}"
+        state: started
+      with_items: "{{ services_to_start }}"
+
+    - name: Getting password
+      ansible.builtin.command: cat /var/lib/jenkins/secrets/initialAdminPassword
+      register: password
+
+    - name: Show output
+      ansible.builtin.debug:
+        var: password.stdout_lines
