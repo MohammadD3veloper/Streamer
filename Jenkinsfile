@@ -5,7 +5,7 @@ pipeline {
             steps {
                 script {
                     def filePath = "Streamer"
-                    if fileExists(filePath) {
+                    if (fileExists(filePath)) {
                         echo "[*] Streamer exists, Skipping step"
                     } else {
                         echo '[*] Getting updated files'
