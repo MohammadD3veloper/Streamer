@@ -9,7 +9,7 @@ COPY . ${PROJECT}
 
 RUN apt update && apt upgrade \
     && pip install --upgrade pip \
-    && pip install -r requirements.txt \
+    && pip install -r requirements/development.txt \
     && useradd -mG sudo -s /bin/bash django
 
 USER django
