@@ -17,7 +17,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo '[*] Building docker image ...'
-                sh "docker build --rm --pull -t streamer:latest -f Streamer/Dockerfile"
+                sh "docker buildx build -t streamer:latest -f Streamer/Dockerfile Streamer/"
             }
         }
         stage('Lint') {
