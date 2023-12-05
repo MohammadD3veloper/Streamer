@@ -67,7 +67,7 @@
         state: started
       with_items: "{{ services_to_start }}"
 
-    - name: Getting password
+    - name: Getting password of jenkins
       ansible.builtin.command: cat /var/lib/jenkins/secrets/initialAdminPassword
       register: password
 
