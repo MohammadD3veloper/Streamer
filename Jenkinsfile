@@ -3,16 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                script {
-                    def filePath = "Streamer"
-                    if (fileExists(filePath)) {
-                        echo "[*] Streamer exists, Just pulling it"
-                        sh "git pull origin master"
-                    } else {
-                        echo '[*] Getting updated files'
-                        sh "git clone https://github.com/MohammadD3veloper/Streamer"
-                    }
-                }
+                git branch: 'master' url: 'https://github.com/MohammadD3veloper/Streamer'
             }
         }
         stage('Build') {
