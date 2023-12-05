@@ -3,8 +3,15 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo '[*] Getting updated files'
-                sh "git clone https://github.com/MohammadD3veloper/Streamer"
+                script {
+                    def filePath = "Streamer"
+                    if fileExists(filePath) {
+                        echo "[*] Streamer exists, Skipping step"
+                    } else {
+                        echo '[*] Getting updated files'
+                        sh "git clone https://github.com/MohammadD3veloper/Streamer"
+                    }
+                }
             }
         }
         stage('Build') {
