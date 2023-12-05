@@ -6,7 +6,8 @@ pipeline {
                 script {
                     def filePath = "Streamer"
                     if (fileExists(filePath)) {
-                        echo "[*] Streamer exists, Skipping step"
+                        echo "[*] Streamer exists, Just pulling it"
+                        sh "git pull origin master"
                     } else {
                         echo '[*] Getting updated files'
                         sh "git clone https://github.com/MohammadD3veloper/Streamer"
