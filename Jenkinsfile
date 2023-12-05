@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'master' url: 'https://github.com/MohammadD3veloper/Streamer'
+                git branch: 'master', url: 'https://github.com/MohammadD3veloper/Streamer'
             }
         }
         stage('Build') {
