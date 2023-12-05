@@ -14,7 +14,7 @@ pipeline {
                 }
             }
         }
-        stage('Buildx') {
+        stage('Build') {
             steps {
                 echo '[*] Building docker image ...'
                 sh "docker buildx build -t streamer:latest -f Streamer/Dockerfile Streamer/"
