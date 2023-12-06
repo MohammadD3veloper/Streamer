@@ -9,6 +9,6 @@ COPY . ${PROJECT}
 
 RUN apt update && apt upgrade \
     && pip install --upgrade pip \
-    && pip install -r requirements/development.txt
+    && pip install -r requirements.txt
 
 EXPOSE 8000
