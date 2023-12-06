@@ -9,9 +9,6 @@ COPY . ${PROJECT}
 
 RUN apt update && apt upgrade \
     && pip install --upgrade pip \
-    && pip install -r requirements/development.txt \
-    && useradd -mG sudo -s /bin/bash django
-
-USER django
+    && pip install -r requirements/development.txt
 
 EXPOSE 8000
