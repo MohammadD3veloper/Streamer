@@ -24,7 +24,6 @@ services:
 
   redis:
     image: redis:latest
-    command: redis-server --requirepass Abc123@#$
     network_mode: host
     volumes:
       - redis_data:/data
