@@ -11,6 +11,7 @@
     packages_to_install:
       - python3-pip
       - python3-virtualenv
+      - docker-compose
 
   tasks:
     - name: Update and upgrade system packages
