@@ -7,6 +7,8 @@ ENV PROJECT "/Streamer"
 
 COPY . ${PROJECT}
 
+WORKDIR ${PROJECT}
+
 RUN apt update && apt upgrade \
     && pip install --upgrade pip \
     && ls && pwd \
