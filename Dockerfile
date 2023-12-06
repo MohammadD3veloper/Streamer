@@ -11,7 +11,6 @@ WORKDIR ${PROJECT}
 
 RUN apt update && apt upgrade \
     && pip install --upgrade pip \
-    && ls && pwd \
     && pip install -r requirements.txt
 
 EXPOSE 8000

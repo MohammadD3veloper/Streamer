@@ -17,7 +17,7 @@ pipeline {
         stage('Lint') {
             steps {
                 echo '[*] Running Linter ...'
-                sh "docker-compose -f docker-compose.yml run django --rm sh -c 'flake8 stramer/'"
+                sh "docker-compose -f docker-compose.yml run django --rm sh -c 'flake8 streamer/'"
             }
         }
         stage('Test') {
