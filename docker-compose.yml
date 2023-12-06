@@ -16,7 +16,7 @@ services:
     image: streamer:latest
     command: celery -A config worker -l INFO
     volumes:
-      - "./:Streamer"
+      - "./:/Streamer"
     depends_on:
      - postgres
      - redis
@@ -42,7 +42,7 @@ services:
   nginx:
     image: nginx:latest
     volumes:
-      - "./:Streamer"
+      - "./:/Streamer"
     depends_on:
       - postgres
       - redis
