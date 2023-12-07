@@ -41,7 +41,7 @@ pipeline {
         stage('deploy') {
             steps {
                 echo '[*] Deploying Streamer ...'
-                sh "docker-compose -f docker-compose.yml up"
+                sh "docker-compose -f docker-compose.yml up -d"
             }
         }
     }
