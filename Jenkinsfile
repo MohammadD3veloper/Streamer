@@ -23,7 +23,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo '[*] Running tests ...'
-                sh "docker-compose -f docker-compose.yml run django sh -c 'python manage.py tests'"
+                sh "docker-compose -f docker-compose.yml run django sh -c 'python manage.py test'"
             }
         }
         stage('migrate') {
