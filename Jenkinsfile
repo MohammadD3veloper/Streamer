@@ -35,7 +35,7 @@ pipeline {
         stage('statics') {
             steps {
                 echo '[*] Running collectstatics ...'
-                sh "docker-compose -f docker-compose.yml run django sh -c 'python manage.py collectstatic'"
+                sh "docker-compose -f docker-compose.yml run django sh -c 'python manage.py collectstatic --noinput'"
             }
         }
         stage('deploy') {
