@@ -40,7 +40,6 @@ DJANGO_APPS = [
 LOCAL_APPS = [
     "streamer.accounts.apps.AccountsConfig",
     "streamer.stream.apps.StreamConfig",
-    "streamer.utils.apps.UtilsConfig",
 ]
 THIRD_PARTY_APPS = []
 
