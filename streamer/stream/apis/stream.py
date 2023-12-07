@@ -1,5 +1,3 @@
-from wsgiref.util import FileWrapper
-
 from rest_framework import generics, status, permissions
 from rest_framework.response import Response
 
@@ -13,11 +11,11 @@ class MusicStreamerAPI(generics.GenericAPIView):
     """ An API for streaming given music """
 
     serializer_class = StreamSerializer
-    permission_classes = (permission_classes.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticated,)
 
     def get(self, request, pk: int):
         """ get music and stream it """
-        
+
         channel_layer = get_channel_layer()
 
         try:
@@ -41,10 +39,9 @@ class MusicStreamerAPI(generics.GenericAPIView):
                             status=status.HTTP_404_NOT_FOUND)
 
 
-
 class CreateMusicStream(generics.CreateAPIView):
     """ An API for creating streamable musics """
 
-    serializer_class = CreateMusicStream
+    serializer_class = CreateStreamSerializer
     permission_classes = (permissions.IsAuthenticated,)
     model = Stream

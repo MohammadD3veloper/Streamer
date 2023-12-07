@@ -1,4 +1,6 @@
+from django.conf import settings
 from django.db import models
+
 
 # Create your models here.
 class Stream(models.Model):
@@ -15,7 +17,7 @@ class Stream(models.Model):
     title = models.CharField(max_length=150)
     music = models.FileField(upload_to=upload_music_file)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                    on_delete=models.CASCADE, related_name="streamed_musics")
+                             on_delete=models.CASCADE, related_name="streamed_musics")
     description = models.TextField(max_length=512, null=True, blank=True)
     image = models.ImageField(upload_to=upload_thumb_file, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)

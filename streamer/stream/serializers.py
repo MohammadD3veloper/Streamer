@@ -16,4 +16,4 @@ class CreateStreamSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Stream
-        fields = ["title","music","description","image","date_created"]
+        fields = ["title", "music", "description", "image", "date_created"]
