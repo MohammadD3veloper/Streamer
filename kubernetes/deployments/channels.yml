@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: django-ch-deploy
-        image: django:latest
+        image: streamer:latest
         command: ["uvicorn -b 0.0.0.0 -p 8000 config.wsgi.application"]
         resources:
           limits:

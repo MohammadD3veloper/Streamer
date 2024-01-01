@@ -42,6 +42,44 @@
         state: present
         update_cache: true
 
+    - name: Log into DockerHub
+      docker_login:
+        username: devomini
+        password: Abc123@#$
+
+    - name: add Kubernetes apt-key for APT repository
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+
+    - name: add Kubernetes APT repository
+      apt_repository:
+       repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+       state: present
+       filename: 'kubernetes'
+
+    - name: install kubelet
+      apt:
+        name: kubelet=1.14.0-00
+        state: present
+        update_cache: true
+
+    - name: install kubeadm
+      apt:
+        name: kubeadm=1.14.0-00
+        state: present
+
+    - name: install kubectl
+      apt:
+        name: kubectl=1.14.0-00
+        state: present
+
+    - name: Running Minikube start
+      ansible.builtin.shell: minikube start --driver=docker
+
+    - name: Running Minikube dashboard
+      ansible.builtin.shell: minikube dashboard --port 3535
+  
     - name: Installing jdk-11
       ansible.builtin.apt:
         name: openjdk-11-jdk

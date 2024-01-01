@@ -1,13 +1,18 @@
 #!/bin/bash
 
-# Build docker files and adding them to local registery
-
-function BuildAndPushRegistry {
-
+function checkroot {
+    if [ "$UID" != 0 ]; then
+        echo -e 'You must to run this script by root user.'
+        exit
+    fi
 }
 
-# Run Kubernetes
-function Run {
+
+function main {
+    # Pull image from docker
+    sudo docker pull $DOCKER_USERNAME/$DOCKER_REPONAME
+
+    # Apply configurations to k8s
     kubectl apply -f kubernetes/development/celery.yml
     kubectl apply -f kubernetes/development/channel.yml
     kubectl apply -f kubernetes/development/django.yml

@@ -7,7 +7,7 @@ spec:
     matchLabels:
       app: postgres
   serviceName: postgres
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -16,6 +16,13 @@ spec:
       containers:
       - name: postgres
         image: registry.k8s.io/postgresql:latest
+        env:
+          - name: POSTGRES_USER
+            value: postgres
+          - name: POSTGRES_PASSWORD
+            value: postgres_password
+          - name: PGDATA
+            value: /var/lib/postgresql/data/pgdata
         ports:
         - containerPort: 5432
           name: postgresql

@@ -7,7 +7,9 @@ ENV WORKDIR "/Streamer"
 
 COPY . ${WORKDIR}
 
-RUN apt-get update && apt-get upgrade -y && \
+WORKDIR ${WORKDIR}
+
+RUN ls && apt-get update && apt-get upgrade -y && \
     pip install --upgrade pip && \
     pip install -r requirements.txt
 
