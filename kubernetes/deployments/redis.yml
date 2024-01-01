@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  serviceName: redis
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: registry.k8s.io/redis:latest
+        ports:
+        - containerPort: 6379
+          name: redis
+        volumeMounts:
+        - name: redis_data
+          mountPath: /redis_data
+  volumeClaimTemplates:
+  - metadata:
+      name: redis_data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 5Gi

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-ch-deploy
+spec:
+  selector:
+    matchLabels:
+      app: django-ch-deploy
+  template:
+    metadata:
+      labels:
+        app: django-ch-deploy
+    spec:
+      containers:
+      - name: django-ch-deploy
+        image: django:latest
+        command: ["uvicorn -b 0.0.0.0 -p 8000 config.wsgi.application"]
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8001
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: django-ch-svc
+spec:
+  selector:
+    app: django-ch-deploy
+  ports:
+  - port: 8001
+    targetPort: 8001

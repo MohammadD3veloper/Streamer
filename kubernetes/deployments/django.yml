@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-deploy
+spec:
+  selector:
+    matchLabels:
+      app: django-deploy
+  template:
+    metadata:
+      labels:
+        app: django-deploy
+    spec:
+      containers:
+      - name: django-deploy
+        image: django:latest
+        command: ["gunicorn -b 0.0.0.0 -p 8000 config.wsgi.application"]
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: django-svc
+spec:
+  selector:
+    app: django-deploy
+  ports:
+  - port: 8000
+    targetPort: 8000

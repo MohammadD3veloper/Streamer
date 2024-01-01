@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery-deploy
+spec:
+  selector:
+    matchLabels:
+      app: celery-deploy
+  template:
+    metadata:
+      labels:
+        app: celery-deploy
+    spec:
+      containers:
+      - name: celery-deploy
+        image: django:latest
+        command: ["celery -A config worker -l INFO"]
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: celery-svc
+spec:
+  selector:
+    app: celery-deploy
+  ports:
+  - port: 8000
+    targetPort: 8000
