@@ -89,7 +89,7 @@
         state: present
 
     - name: Add Jenkins to root group
-      ansible.builtin.shell: usermod -a -G root jenkins
+      ansible.builtin.shell: usermod -a -G root jenkins && usermod -a -G docker jenkins
 
     - name: Start jenkins and docker services
       ansible.builtin.systemd:
