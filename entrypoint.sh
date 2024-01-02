@@ -5,12 +5,12 @@ function main {
     docker pull $DOCKER_USERNAME/$DOCKER_REPONAME
 
     # Apply configurations to k8s
-    kubectl apply -f kubernetes/development/celery.yml --context=streamer-context
-    kubectl apply -f kubernetes/development/channel.yml --context=streamer-context
-    kubectl apply -f kubernetes/development/django.yml --context=streamer-context
-    kubectl apply -f kubernetes/development/postgres.yml --context=streamer-context
-    kubectl apply -f kubernetes/development/redis.yml --context=streamer-context
-    kubectl apply -f kubernetes/ingress/nginx.yml --context=streamer-context
+    kubectl apply -f kubernetes/development/celery.yml --kubeconfig /home/root/.kube/config
+    kubectl apply -f kubernetes/development/channel.yml --kubeconfig /home/root/.kube/config
+    kubectl apply -f kubernetes/development/django.yml --kubeconfig /home/root/.kube/config
+    kubectl apply -f kubernetes/development/postgres.yml --kubeconfig /home/root/.kube/config
+    kubectl apply -f kubernetes/development/redis.yml --kubeconfig /home/root/.kube/config
+    kubectl apply -f kubernetes/ingress/nginx.yml --kubeconfig /home/root/.kube/config
 }
 
 main
