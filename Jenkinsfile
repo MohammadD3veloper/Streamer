@@ -28,8 +28,8 @@ pipeline {
         }
         stage('tagAndPush') {
             steps {
-                sh "docker tag streamer:latest ${env.DOCKER_USERNAME}/streamer:latest"
-                sh "docker push ${env.DOCKER_REPONAME}/streamer:latest"
+                sh "docker tag streamer:latest ${env.DOCKER_USERNAME}/${env.DOCKER_REPONAME}:latest"
+                sh "docker push ${env.DOCKER_USERNAME}/${env.DOCKER_REPONAME}:latest"
             }
         }
         stage('deploy') {
