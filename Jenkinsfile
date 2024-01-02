@@ -17,31 +17,31 @@ pipeline {
         stage('Lint') {
             steps {
                 echo '[*] Running Linter ...'
-                sh "docker run -i -t streamer:latest sh -c 'flake8 streamer/'"
+                sh "docker run streamer:latest sh -c 'flake8 streamer/'"
             }
         }
         stage('Test') {
             steps {
                 echo '[*] Running tests ...'
-                sh "docker run -i -t streamer:latest sh -c 'python manage.py test'"
+                sh "docker run streamer:latest sh -c 'python manage.py test'"
             }
         }
         stage('migrate') {
             steps {
                 echo '[*] Running Migrations ...'
-                sh "docker run -i -t streamer:latest sh -c 'python manage.py migrate'"
+                sh "docker run streamer:latest sh -c 'python manage.py migrate'"
             }
         }
         stage('statics') {
             steps {
                 echo '[*] Running collectstatics ...'
-                sh '''docker run -i -t streamer:latest sh -c
+                sh '''docker run streamer:latest sh -c
                                     "python manage.py collectstatic --noinput"'''
             }
         }
         stage('addSuperuser') {
             steps {
-                sh '''docker run -i -t streamer:latest sh -c "export 
+                sh '''docker run streamer:latest sh -c "export 
                     DJANGO_SUPERUSER_EMAIL=${env.SUPERUSER_EMAIL}  &&
                         export DJANGO_SUPERUSER_PASSWORD=${env.SUPERUSER_PASSWORD} &&
                             python manage.py createsuperuser --no-input
