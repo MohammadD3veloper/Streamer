@@ -40,7 +40,9 @@ pipeline {
         }
         stage('addSuperuser') {
             steps {
-                sh '''docker run streamer:latest sh -c "export DJANGO_SUPERUSER_EMAIL=${env.SUPERUSER_EMAIL} && export DJANGO_SUPERUSER_PASSWORD=${env.SUPERUSER_PASSWORD} && python manage.py createsuperuser --no-input --username ${env.SUPERUSER_USERNAME}"'''
+                sh "docker run streamer:latest sh -c \"export DJANGO_SUPERUSER_EMAIL=${env.SUPERUSER_EMAIL}\""
+                sh "docker run streamer:latest sh -c \"export DJANGO_SUPERUSER_PASSWORD=${env.SUPERUSER_PASSWORD}\""
+                sh "docker run streamer:latest sh -c \"python manage.py createsuperuser --no-input --username ${env.SUPERUSER_USERNAME}\""
             }
         }
         stage('tagAndPush') {
