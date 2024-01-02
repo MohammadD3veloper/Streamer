@@ -23,6 +23,6 @@ RUN python manage.py collectstatic --noinput
 
 RUN export DJANGO_SUPERUSER_EMAIL=${SUPERUSER_EMAIL}
 RUN export DJANGO_SUPERUSER_PASSWORD=${SUPERUSER_PASSWORD}
-RUN python manage.py createsuperuser --no-input --username ${SUPERUSER_USERNAME}
+RUN python manage.py createsuperuser --no-input --username ${SUPERUSER_USERNAME} --email ${SUPERUSER_EMAIL}
 
 EXPOSE 8000
