@@ -26,25 +26,6 @@ pipeline {
                 sh "docker run streamer:latest sh -c 'python manage.py test'"
             }
         }
-        stage('migrate') {
-            steps {
-                echo '[*] Running Migrations ...'
-                sh "docker run streamer:latest sh -c 'python manage.py migrate'"
-            }
-        }
-        stage('statics') {
-            steps {
-                echo '[*] Running collectstatics ...'
-                sh 'docker run streamer:latest sh -c "python manage.py collectstatic --noinput"'
-            }
-        }
-        stage('addSuperuser') {
-            steps {
-                sh "docker run streamer:latest sh -c \"export DJANGO_SUPERUSER_EMAIL=${env.SUPERUSER_EMAIL}\""
-                sh "docker run streamer:latest sh -c \"export DJANGO_SUPERUSER_PASSWORD=${env.SUPERUSER_PASSWORD}\""
-                sh "docker run streamer:latest sh -c \"python manage.py createsuperuser --no-input --username ${env.SUPERUSER_USERNAME}\""
-            }
-        }
         stage('tagAndPush') {
             steps {
                 sh "docker tag streamer:latest ${env.DOCKER_USERNAME}/streamer:latest"
