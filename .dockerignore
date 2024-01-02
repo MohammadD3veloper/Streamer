@@ -1,0 +1,10 @@
+ansible/
+kubernetes/
+.vscode
+.streamer
+.pytest_cache
+docker/
+.gitignore
+entrypoint.sh
+Jenkinsfile
+TODO.md

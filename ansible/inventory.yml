@@ -1,4 +1,4 @@
 all:
   hosts:
-    172.104.148.48:
+    139.162.139.72:
       ansible_user: root

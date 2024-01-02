@@ -1,10 +1,6 @@
-- hosts: 172.104.148.48
+- hosts: 139.162.139.72
   become: true
   vars:
-    # (shecan) just for local servers
-    dns_servers:
-      - 178.22.122.100
-      - 185.51.200.2
     services_to_start:
       - jenkins
       - docker
@@ -42,10 +38,10 @@
         state: present
         update_cache: true
 
-    - name: Log into DockerHub
-      docker_login:
-        username: devomini
-        password: Abc123@#$
+    # - name: Log into DockerHub
+    #   docker_login:
+    #     username: devomini
+    #     password: Abc123@#$
 
     - name: add Kubernetes apt-key for APT repository
       apt_key:
@@ -58,27 +54,19 @@
        state: present
        filename: 'kubernetes'
 
-    - name: install kubelet
+    - name: install k8s tools
       apt:
-        name: kubelet=1.14.0-00
+        name:
+          - kubelet
+          - kubernetes-cni
+          - kubeadm
+          - kubectl
         state: present
         update_cache: true
 
-    - name: install kubeadm
-      apt:
-        name: kubeadm=1.14.0-00
-        state: present
-
-    - name: install kubectl
-      apt:
-        name: kubectl=1.14.0-00
-        state: present
-
-    - name: Running Minikube start
-      ansible.builtin.shell: minikube start --driver=docker
-
-    - name: Running Minikube dashboard
-      ansible.builtin.shell: minikube dashboard --port 3535
+    - name: Install Minikube
+      ansible.builtin.shell:
+        curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo install minikube-linux-amd64 /usr/local/bin/minikube
   
     - name: Installing jdk-11
       ansible.builtin.apt:
@@ -100,11 +88,18 @@
         name: jenkins
         state: present
 
+    - name: Add Jenkins to root group
+      ansible.builtin.shell: usermod -a -G root jenkins
+
     - name: Start jenkins and docker services
       ansible.builtin.systemd:
         name: "{{ item }}"
         state: started
       with_items: "{{ services_to_start }}"
+
+    - name: Running Minikube start
+      ansible.builtin.shell: minikube start --driver=docker --force
+      become: false
 
     - name: Getting password of jenkins
       ansible.builtin.command: cat /var/lib/jenkins/secrets/initialAdminPassword
