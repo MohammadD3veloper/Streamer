@@ -1,4 +1,5 @@
-- hosts: 139.162.139.72
+- name: Hosts Available
+  hosts: 139.162.139.72
   become: true
   vars:
     services_to_start:
@@ -38,24 +39,24 @@
         state: present
         update_cache: true
 
-    # - name: Log into DockerHub
-    #   docker_login:
-    #     username: devomini
-    #     password: Abc123@#$
+    - name: Log into DockerHub
+      community.docker.docker_login:
+        username: devomini
+        password: Abc123@#$
 
-    - name: add Kubernetes apt-key for APT repository
-      apt_key:
+    - name: Add Kubernetes apt-key for APT repository
+      ansible.builtin.apt_key:
         url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
         state: present
 
-    - name: add Kubernetes APT repository
-      apt_repository:
-       repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
-       state: present
-       filename: 'kubernetes'
+    - name: Add Kubernetes APT repository
+      ansible.builtin.apt_repository:
+        repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
+        state: present
+        filename: 'kubernetes'
 
-    - name: install k8s tools
-      apt:
+    - name: Install k8s tools
+      ansible.builtin.apt:
         name:
           - kubelet
           - kubernetes-cni
@@ -66,8 +67,8 @@
 
     - name: Install Minikube
       ansible.builtin.shell:
-        curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo install minikube-linux-amd64 /usr/local/bin/minikube
-  
+        curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+
     - name: Installing jdk-11
       ansible.builtin.apt:
         name: openjdk-11-jdk
