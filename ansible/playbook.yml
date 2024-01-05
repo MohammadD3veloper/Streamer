@@ -1,5 +1,5 @@
 - name: Hosts Available
-  hosts: 139.162.139.72
+  hosts: 46.101.81.119
   become: true
   vars:
     services_to_start:
@@ -38,11 +38,6 @@
         name: docker-ce
         state: present
         update_cache: true
-
-    - name: Log into DockerHub
-      community.docker.docker_login:
-        username: devomini
-        password: Abc123@#$
 
     - name: Add Kubernetes apt-key for APT repository
       ansible.builtin.apt_key:
@@ -97,6 +92,11 @@
         name: "{{ item }}"
         state: started
       with_items: "{{ services_to_start }}"
+
+    - name: Log into DockerHub
+      community.docker.docker_login:
+        username: devomini
+        password: Abc123@#$
 
     - name: Running Minikube start
       ansible.builtin.shell: minikube start --driver=docker --force
