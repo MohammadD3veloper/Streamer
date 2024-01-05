@@ -5,11 +5,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: channels-pod
+      app: channels-deploy
   template:
     metadata:
       labels:
-        app: channels-pod
+        app: channels-deploy
     spec:
       imagePullSecrets:
       - name: dockerauth
