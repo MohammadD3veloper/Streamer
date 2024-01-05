@@ -11,6 +11,8 @@ spec:
       labels:
         app: channels-deploy
     spec:
+      imagePullSecrets:
+        - name: dockerauth
       containers:
       - name: channels-deploy
         image: streamer:latest
@@ -21,8 +23,6 @@ spec:
             cpu: "200m"
         ports:
         - containerPort: 8001
-    imagePullSecrets:
-      - name: dockerauth
 
 ---
 apiVersion: v1

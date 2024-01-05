@@ -11,6 +11,8 @@ spec:
       labels:
         app: celery-deploy
     spec:
+      imagePullSecrets:
+        - name: dockerauth
       containers:
       - name: celery-deploy
         image: streamer:latest
@@ -21,8 +23,6 @@ spec:
             cpu: "200m"
         ports:
         - containerPort: 8002
-    imagePullSecrets:
-      - name: dockerauth
 
 ---
 apiVersion: v1

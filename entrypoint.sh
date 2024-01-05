@@ -4,8 +4,6 @@ function main {
     # Pull image from docker
     docker pull $DOCKER_USERNAME/$DOCKER_REPONAME
 
-    ls
-
     # Apply configurations to k8s
     kubectl apply -f kubernetes/secrets/docker.yml
     kubectl apply -f kubernetes/deployments/celery.yml
