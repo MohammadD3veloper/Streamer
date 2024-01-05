@@ -3,6 +3,11 @@
 function main {
     # Pull image from docker
     docker pull $DOCKER_USERNAME/$DOCKER_REPONAME
+    # delete running kubernetes clusters
+    kubectl delete deployments --all
+    kubectl delete secrets --all
+    kubectl delete ingress --all
+    kubectl delete statefulset --all
 
     # Apply configurations to k8s
     kubectl apply -f kubernetes/secrets/docker.yml
