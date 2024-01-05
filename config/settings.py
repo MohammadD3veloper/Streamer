@@ -41,7 +41,9 @@ LOCAL_APPS = [
     "streamer.accounts.apps.AccountsConfig",
     "streamer.stream.apps.StreamConfig",
 ]
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    "django_celery_results"
+]
 
 INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
@@ -131,3 +133,6 @@ STATIC_ROOT = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+BROKER_URL = 'redis://redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
