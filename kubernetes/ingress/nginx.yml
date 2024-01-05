@@ -16,11 +16,11 @@ spec:
           service:
             name: django-svc
             port:
-              number: 80
+              number: 8000
       - path: /ws/
         pathType: Prefix
         backend:
           service:
             name: channels-svc
             port:
-              number: 80
+              number: 8001
