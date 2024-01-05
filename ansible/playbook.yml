@@ -1,6 +1,7 @@
 - name: Hosts Available
-  hosts: 46.101.81.119
+  hosts: 172.105.89.204
   become: true
+  become_user: root
   vars:
     services_to_start:
       - jenkins
@@ -93,18 +94,35 @@
         state: started
       with_items: "{{ services_to_start }}"
 
-    - name: Log into DockerHub
-      community.docker.docker_login:
-        username: devomini
-        password: Abc123@#$
-
     - name: Running Minikube start
       ansible.builtin.shell: minikube start --driver=docker --force
       become: false
 
     - name: Getting password of jenkins
-      ansible.builtin.command: cat /var/lib/jenkins/secrets/initialAdminPassword
+      ansible.builtin.shell: |
+        #!/bin/bash
+        if [ -f /var/lib/jenkins/secrets/initialAdminPassword ]; then
+          cat /var/lib/jenkins/secrets/initialAdminPassword
+        else
+          echo Jenkins intial password has been used
+        fi
       register: password
+
+    - name: Add jenkins user
+      ansible.builtin.user:
+        name: jenkins
+        password: '$6$IDgc1fk6/yoeU0pc$j31/tEQCXtb8K4YblWZ0EicIB9Te4yKzvxKqEwIMk/muwhX/D2.uBLLZL9ZPS6uzSRLNbMN.o9dT4d./m9HdQ0'
+        groups:
+          - docker
+          - sudo
+        state: present
+
+    - name: Log into DockerHub with jenkins user
+      community.docker.docker_login:
+        username: devomini
+        password: Abc123@#$
+      become: true
+      become_user: jenkins
 
     - name: Show output
       ansible.builtin.debug:
