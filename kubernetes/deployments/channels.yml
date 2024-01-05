@@ -5,16 +5,16 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: channels-svc
+      app: channels-pod
   template:
     metadata:
       labels:
-        app: channels-svc
+        app: channels-pod
     spec:
       imagePullSecrets:
       - name: dockerauth
       containers:
-      - name: channels-deploy
+      - name: channels-container
         image: devomini/streamer:latest
         command: 
           - "uvicorn"

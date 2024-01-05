@@ -5,16 +5,16 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: celery-svc
+      app: celery-pod
   template:
     metadata:
       labels:
-        app: celery-svc
+        app: celery-pod
     spec:
       imagePullSecrets:
       - name: dockerauth
       containers:
-      - name: celery-deploy
+      - name: celery-container
         image: devomini/streamer:latest
         command: 
           - "celery"

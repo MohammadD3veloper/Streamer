@@ -5,16 +5,16 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: django-svc
+      app: django-pod
   template:
     metadata:
       labels:
-        app: django-svc
+        app: django-pod
     spec:
       imagePullSecrets:
       - name: dockerauth
       containers:
-      - name: django-deploy
+      - name: django-container
         image: devomini/streamer:latest
         command:
           - "gunicorn"
