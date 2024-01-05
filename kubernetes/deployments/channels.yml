@@ -16,7 +16,11 @@ spec:
       containers:
       - name: channels-deploy
         image: devomini/streamer:latest
-        command: ["uvicorn -b 0.0.0.0 -p 8000 config.wsgi.application"]
+        command: 
+          - "uvicorn"
+          - "--host 0.0.0.0"
+          - "--port 8000"
+          - "config.asgi:application"
         resources:
           limits:
             memory: "128Mi"

@@ -16,7 +16,13 @@ spec:
       containers:
       - name: celery-deploy
         image: devomini/streamer:latest
-        command: ["celery -A config worker -l INFO"]
+        command: 
+          - "celery"
+          - "-A"
+          - "config"
+          - "worker"
+          - "-l"
+          - "INFO"
         resources:
           limits:
             memory: "128Mi"
