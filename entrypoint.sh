@@ -5,6 +5,7 @@ function main {
     docker pull $DOCKER_USERNAME/$DOCKER_REPONAME
     # delete running kubernetes clusters
     kubectl delete deployments --all
+    kubectl delete services --all
     kubectl delete secrets --all
     kubectl delete ingress --all
     kubectl delete statefulset --all
