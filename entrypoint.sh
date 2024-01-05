@@ -7,6 +7,7 @@ function main {
     ls
 
     # Apply configurations to k8s
+    kubectl apply -f kubernetes/secrets/docker.yml
     kubectl apply -f kubernetes/deployments/celery.yml
     kubectl apply -f kubernetes/deployments/channels.yml
     kubectl apply -f kubernetes/deployments/django.yml
