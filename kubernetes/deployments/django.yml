@@ -5,11 +5,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: django-deploy
+      app: django-svc
   template:
     metadata:
       labels:
-        app: django-deploy
+        app: django-svc
     spec:
       imagePullSecrets:
       - name: dockerauth

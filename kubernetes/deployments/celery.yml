@@ -5,11 +5,11 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: celery-deploy
+      app: celery-svc
   template:
     metadata:
       labels:
-        app: celery-deploy
+        app: celery-svc
     spec:
       imagePullSecrets:
       - name: dockerauth
