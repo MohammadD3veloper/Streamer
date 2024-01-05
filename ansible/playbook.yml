@@ -1,5 +1,5 @@
 - name: Hosts Available
-  hosts: 172.105.89.204
+  hosts: 45.79.251.35
   become: true
   become_user: root
   vars:
@@ -94,10 +94,6 @@
         state: started
       with_items: "{{ services_to_start }}"
 
-    - name: Running Minikube start
-      ansible.builtin.shell: minikube start --driver=docker --force
-      become: false
-
     - name: Getting password of jenkins
       ansible.builtin.shell: |
         #!/bin/bash
@@ -121,6 +117,11 @@
       community.docker.docker_login:
         username: devomini
         password: Abc123@#$
+      become: true
+      become_user: jenkins
+
+    - name: Running Minikube start
+      ansible.builtin.shell: minikube start --driver=docker
       become: true
       become_user: jenkins
 
