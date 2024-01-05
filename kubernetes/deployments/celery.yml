@@ -12,7 +12,7 @@ spec:
         app: celery-deploy
     spec:
       imagePullSecrets:
-        - name: dockerauth
+      - name: dockerauth
       containers:
       - name: celery-deploy
         image: streamer:latest

@@ -12,7 +12,7 @@ spec:
         app: channels-deploy
     spec:
       imagePullSecrets:
-        - name: dockerauth
+      - name: dockerauth
       containers:
       - name: channels-deploy
         image: streamer:latest

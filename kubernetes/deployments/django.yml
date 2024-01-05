@@ -12,7 +12,7 @@ spec:
         app: django-deploy
     spec:
       imagePullSecrets:
-        - name: dockerauth
+      - name: dockerauth
       containers:
       - name: django-deploy
         image: streamer:latest
