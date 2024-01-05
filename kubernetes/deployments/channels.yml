@@ -15,7 +15,7 @@ spec:
       - name: dockerauth
       containers:
       - name: channels-deploy
-        image: streamer:latest
+        image: devomini/streamer:latest
         command: ["uvicorn -b 0.0.0.0 -p 8000 config.wsgi.application"]
         resources:
           limits:

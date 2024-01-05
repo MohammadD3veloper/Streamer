@@ -15,7 +15,7 @@ spec:
       - name: dockerauth
       containers:
       - name: celery-deploy
-        image: streamer:latest
+        image: devomini/streamer:latest
         command: ["celery -A config worker -l INFO"]
         resources:
           limits:
