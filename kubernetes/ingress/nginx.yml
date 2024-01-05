@@ -2,22 +2,20 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-ingress
-  labels:
-    name: nginx-ingress
 spec:
   rules:
   - host: devo.devoreal.top
     http:
       paths:
-      - pathType: django
-        path: "/"
+      - path: /
+        pathType: Prefix
         backend:
           service:
             name: django-svc
-            port: 
+            port:
               number: 80
-      - pathType: channels
-        path: "/ws"
+      - path: /ws/
+        pathType: Prefix
         backend:
           service:
             name: channels-svc

@@ -7,11 +7,11 @@ function main {
     ls
 
     # Apply configurations to k8s
-    kubectl apply -f kubernetes/development/celery.yml
-    kubectl apply -f kubernetes/development/channel.yml
-    kubectl apply -f kubernetes/development/django.yml
-    kubectl apply -f kubernetes/development/postgres.yml
-    kubectl apply -f kubernetes/development/redis.yml
+    kubectl apply -f kubernetes/deployments/celery.yml
+    kubectl apply -f kubernetes/deployments/channel.yml
+    kubectl apply -f kubernetes/deployments/django.yml
+    kubectl apply -f kubernetes/deployments/postgres.yml
+    kubectl apply -f kubernetes/deployments/redis.yml
     kubectl apply -f kubernetes/ingress/nginx.yml
 }
 
