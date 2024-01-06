@@ -23,10 +23,6 @@ spec:
           - "--port" 
           - "8001"
           - "config.asgi:application"
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "300m"
         ports:
         - containerPort: 8001
 

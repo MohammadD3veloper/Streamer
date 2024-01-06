@@ -21,10 +21,6 @@ spec:
           - "-b"
           - "0.0.0.0:8000"
           - "config.wsgi:application" 
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "300m"
         ports:
         - containerPort: 8000
 
