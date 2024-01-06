@@ -8,7 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/websocket-services: "channels-svc"
 spec:
   rules:
-  - host: devoreal.top
+  - host: www.devoreal.top
     http:
       paths:
       - path: /
