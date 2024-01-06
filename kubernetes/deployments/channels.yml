@@ -35,5 +35,7 @@ spec:
   selector:
     app: channels-deploy
   ports:
-  - port: 8001
+  - protocol: TCP
+    port: 8001
     targetPort: 8001
+  type: NodePort
