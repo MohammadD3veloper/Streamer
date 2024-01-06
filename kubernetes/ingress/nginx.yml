@@ -25,3 +25,4 @@ spec:
             name: channels-svc
             port:
               number: 8001
+
