@@ -11,7 +11,6 @@ function main {
     kubectl delete statefulset --all
 
     # Apply configurations to k8s
-    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.3/deploy/static/provider/baremetal/deploy.yaml
     kubectl apply -f kubernetes/secrets/docker.yml
     kubectl apply -f kubernetes/deployments/celery.yml
     kubectl apply -f kubernetes/deployments/channels.yml
