@@ -9,18 +9,18 @@ metadata:
 spec:
   rules:
   - http:
-    paths:
-    - path: /
-      pathType: Prefix
-      backend:
-        service:
-          name: django-svc
-          port:
-            number: 8000
-    - path: /ws/
-      pathType: ImplementationSpecific
-      backend:
-        service:
-          name: channels-svc
-          port:
-            number: 8001
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: django-svc
+            port:
+              number: 8000
+      - path: /ws/
+        pathType: Prefix
+        backend:
+          service:
+            name: channels-svc
+            port:
+              number: 8001
