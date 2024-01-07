@@ -1,5 +1,5 @@
 - name: Hosts Available
-  hosts: 172.104.236.41
+  hosts: 172.104.145.37
   become: true
   become_user: root
   vars:
