@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: channels-deploy
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: channels-deploy
@@ -11,10 +12,8 @@ spec:
       labels:
         app: channels-deploy
     spec:
-      imagePullSecrets:
-      - name: dockerauth
       containers:
-      - name: channels-container
+      - name: channels-deploy
         image: devomini/streamer:latest
         command: 
           - "uvicorn"
@@ -32,10 +31,11 @@ kind: Service
 metadata:
   name: channels-svc
 spec:
+  type: LoadBalancer
+  ports:
+  - port: 8001
+    targetPort: 8001
+    protocol: TCP
+    name: http
   selector:
     app: channels-deploy
-  ports:
-  - protocol: TCP
-    port: 8001
-    targetPort: 8001
-  type: NodePort
