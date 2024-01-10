@@ -13,7 +13,7 @@ COPY . ${WORKDIR}
 
 WORKDIR ${WORKDIR}
 
-RUN ls && apt-get update && apt-get upgrade -y && \
+RUN apt-get update && apt-get upgrade -y && \
     pip install --upgrade pip && \
     pip install -r requirements.txt
 
