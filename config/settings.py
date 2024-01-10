@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-zluujrs9^8*)sc_8t$&3r=mt%$trm$z8!p9g4j-8b^g_)k)g1u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["devoreal.top"]
 
 
 # Application definition
