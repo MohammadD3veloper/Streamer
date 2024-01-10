@@ -27,11 +27,11 @@ spec:
         - containerPort: 5432
           name: postgresql
         volumeMounts:
-        - name: psql_data
+        - name: psql-data
           mountPath: /var/lib/postgresql/data
   volumeClaimTemplates:
   - metadata:
-      name: psql_data
+      name: psql-data
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:

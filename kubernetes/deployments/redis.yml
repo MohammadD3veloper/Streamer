@@ -20,11 +20,11 @@ spec:
         - containerPort: 6379
           name: redis
         volumeMounts:
-        - name: redis_data
+        - name: redis-data
           mountPath: /redis_data
   volumeClaimTemplates:
   - metadata:
-      name: redis_data
+      name: redis-data
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
