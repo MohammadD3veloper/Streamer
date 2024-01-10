@@ -1,5 +1,5 @@
 - name: Hosts Available
-  hosts: 172.104.145.37
+  hosts: 165.22.233.115
   become: true
   become_user: root
   vars:
@@ -10,7 +10,6 @@
       - python3-pip
       - python3-virtualenv
       - docker-compose
-
   tasks:
     - name: Update and upgrade system packages
       ansible.builtin.apt:
@@ -39,31 +38,6 @@
         name: docker-ce
         state: present
         update_cache: true
-
-    - name: Add Kubernetes apt-key for APT repository
-      ansible.builtin.apt_key:
-        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-        state: present
-
-    - name: Add Kubernetes APT repository
-      ansible.builtin.apt_repository:
-        repo: deb http://apt.kubernetes.io/ kubernetes-xenial main
-        state: present
-        filename: 'kubernetes'
-
-    - name: Install k8s tools
-      ansible.builtin.apt:
-        name:
-          - kubelet
-          - kubernetes-cni
-          - kubeadm
-          - kubectl
-        state: present
-        update_cache: true
-
-    - name: Install Minikube
-      ansible.builtin.shell:
-        curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
 
     - name: Installing jdk-11
       ansible.builtin.apt:
@@ -120,11 +94,11 @@
       become: true
       become_user: jenkins
 
-    - name: Running Minikube start
-      ansible.builtin.shell: minikube start --driver=docker
-      become: true
-      become_user: jenkins
-
     - name: Show output
       ansible.builtin.debug:
         var: password.stdout_lines
+
+    # - name: Install k3s
+    #   ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -
+    #   become: true
+    #   become_user: jenkins
