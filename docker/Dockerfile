@@ -19,7 +19,7 @@ RUN apt-get update && apt-get upgrade -y && \
 
 RUN python manage.py migrate
 
-RUN python manage.py collectstatic --noinput
+RUN mkdir static && python manage.py collectstatic --noinput
 
 RUN python manage.py createsuperuser --no-input --username ${SUPERUSER_USERNAME} --email ${SUPERUSER_EMAIL}
 
