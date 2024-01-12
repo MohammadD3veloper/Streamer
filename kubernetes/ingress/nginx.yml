@@ -31,7 +31,7 @@ spec:
   - host: grafana.devoreal.top
     http:
       paths:
-      - path: /monitor/
+      - path: /
         pathType: Prefix
         backend:
           service:
