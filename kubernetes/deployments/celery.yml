@@ -24,12 +24,16 @@ spec:
           - "INFO"
         ports:
         - containerPort: 8002
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "500m"
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: channels-svc
+  name: celery-svc
 spec:
   type: NodePort
   ports:

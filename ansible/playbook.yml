@@ -98,7 +98,15 @@
       ansible.builtin.debug:
         var: password.stdout_lines
 
-    # - name: Install k3s
-    #   ansible.builtin.shell: curl -sfL https://get.k3s.io | sh -
-    #   become: true
-    #   become_user: jenkins
+    - name: Install k3s and helm and prometheus
+      ansible.builtin.shell: |
+        #!/bin/bash
+        # Install k3s
+        curl -sfL https://get.k3s.io -o k3s.sh
+        chmod +x k3s.sh && ./k3s.sh
+        # configuring k3s
+        mkdir $HOME/.kube
+        sudo cp /etc/rancher/k3s/k3s.yml $HOME/.kube/config
+        sudo chmod 644 $HOME/.kube/config
+      become: true
+      become_user: jenkins

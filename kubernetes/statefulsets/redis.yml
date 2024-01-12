@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: redis
-  serviceName: redis
+  serviceName: redis-svc
   replicas: 1
   template:
     metadata:
@@ -30,3 +30,15 @@ spec:
       resources:
         requests:
           storage: 5Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-svc
+spec:
+  selector:
+    app: redis
+  ports:
+  - port: 6379
+    targetPort: 6379

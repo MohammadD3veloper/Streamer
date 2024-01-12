@@ -24,7 +24,10 @@ spec:
           - "config.asgi:application"
         ports:
         - containerPort: 8001
-
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "500m"
 ---
 apiVersion: v1
 kind: Service

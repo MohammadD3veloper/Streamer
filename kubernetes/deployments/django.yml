@@ -24,9 +24,12 @@ spec:
         - "config.wsgi:application"
         ports:
         - containerPort: 8000
+        resources:
+          limits:
+            cpu: "200m"
+            memory: "500m"
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:

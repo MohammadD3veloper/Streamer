@@ -15,8 +15,10 @@ function main {
     kubectl apply -f kubernetes/deployments/celery.yml
     kubectl apply -f kubernetes/deployments/channels.yml
     kubectl apply -f kubernetes/deployments/django.yml
-    kubectl apply -f kubernetes/deployments/postgres.yml
-    kubectl apply -f kubernetes/deployments/redis.yml
+    kubectl apply -f kubernetes/statefulsets/postgres.yml
+    kubectl apply -f kubernetes/statefulsets/redis.yml
+    kubectl apply -f kubernetes/statefulsets/prometheus.yml
+    kubectl apply -f kubernetes/statefulsets/grafana.yml
     kubectl apply -f kubernetes/ingress/nginx.yml
 }
 
