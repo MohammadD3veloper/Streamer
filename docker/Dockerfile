@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-ENV PYTHONDONTWITEBYTECODE 1
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 ENV SUPERUSER_EMAIL=test@gmail.com
@@ -21,8 +21,6 @@ RUN python manage.py migrate
 
 RUN python manage.py collectstatic --noinput
 
-RUN export DJANGO_SUPERUSER_EMAIL=${SUPERUSER_EMAIL}
-RUN export DJANGO_SUPERUSER_PASSWORD=${SUPERUSER_PASSWORD}
 RUN python manage.py createsuperuser --no-input --username ${SUPERUSER_USERNAME} --email ${SUPERUSER_EMAIL}
 
 EXPOSE 8000
