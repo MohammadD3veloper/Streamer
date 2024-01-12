@@ -5,9 +5,11 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/websocket-services: "channels-svc"
 spec:
   rules:
-  - http:
+  - host: devoreal.top
+    http:
       paths:
       - path: /
         pathType: Prefix
@@ -16,7 +18,8 @@ spec:
             name: django-svc
             port:
               number: 8000
-  - http:
+  - host: devoreal.top
+    http:
       paths:
       - path: /ws/
         pathType: Prefix
@@ -25,16 +28,8 @@ spec:
             name: channels-svc
             port:
               number: 8001
-  - http:
-      paths:
-      - path: /prometheus/
-        pathType: Prefix
-        backend:
-          service:
-            name: prometheus-svc
-            port:
-              number: 9090
-  - http:
+  - host: grafana.devoreal.top
+    http:
       paths:
       - path: /monitor/
         pathType: Prefix
