@@ -25,3 +25,19 @@ spec:
             name: channels-svc
             port:
               number: 8001
+  - http:
+      paths:
+      - path: /monitor/prometheus
+        pathType: Prefix
+        backend:
+          service:
+            name: prometheus-svc
+            port: 9090
+  - http:
+      paths:
+      - path: /monitor
+        pathType: Prefix
+        backend:
+          service:
+            name: grafana-svc
+            port: 3000
