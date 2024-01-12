@@ -21,7 +21,7 @@ spec:
         volumeMounts:
         - name: prometheus-config
           mountPath: /etc/prometheus/prometheus.yml
-          subPath: config/prometheus.yml
+          subPath: ./config/prometheus.yml
   volumeClaimTemplates:
   - metadata:
       name: prometheus-config
