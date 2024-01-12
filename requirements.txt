@@ -10,3 +10,4 @@ celery==5.3.6
 Pillow==10.1.0
 django-celery-results==2.5.1
 redis==5.0.1
+django-prometheus==2.3.1
