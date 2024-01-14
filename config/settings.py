@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-zluujrs9^8*)sc_8t$&3r=mt%$trm$z8!p9g4j-8b^g_)k)g1u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["devoreal.top"]
+ALLOWED_HOSTS = ["devoreal.top", "127.0.0.1"]
 
 
 # Application definition
@@ -40,6 +40,7 @@ DJANGO_APPS = [
 LOCAL_APPS = [
     "streamer.accounts.apps.AccountsConfig",
     "streamer.stream.apps.StreamConfig",
+    "streamer.pages.apps.PagesConfig",
 ]
 THIRD_PARTY_APPS = [
     "django_celery_results",
@@ -65,7 +66,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['streamer/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,7 +129,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "Streamer/static",
+    BASE_DIR / "streamer/static",
 ]
 STATIC_ROOT = "static/"
 
