@@ -25,7 +25,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo '[*] Running tests ...'
-                sh "docker run streamer:latest sh -c 'python manage.py test'"
+                sh "docker run streamer:latest sh -c 'python manage.py test streamer'"
             }
         }
         stage('tagAndPush') {
