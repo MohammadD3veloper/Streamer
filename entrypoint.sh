@@ -9,6 +9,7 @@ function main {
     kubectl delete secrets --all
     kubectl delete ingress --all
     kubectl delete statefulset --all
+    kubectl delete daemonset --all
 
     # Apply configurations to k8s
     kubectl apply -f kubernetes/secrets/docker.yml
@@ -18,6 +19,7 @@ function main {
     kubectl apply -f kubernetes/statefulsets/postgres.yml
     kubectl apply -f kubernetes/statefulsets/redis.yml
     kubectl apply -f kubernetes/statefulsets/prometheus.yml
+    kubectl apply -f kubernetes/statefulsets/exporters/node-exporter.yml
     kubectl apply -f kubernetes/statefulsets/grafana.yml
     kubectl apply -f kubernetes/ingress/nginx.yml
 }
