@@ -1,7 +1,7 @@
 - name: Hosts Available
-  hosts: 165.22.233.115
+  hosts: {{ ansible_env.HOST_SERVER }}
   become: true
-  become_user: root
+  become_user: {{ ansible_env.USER_SERVER }}
   vars:
     services_to_start:
       - jenkins
@@ -89,8 +89,8 @@
 
     - name: Log into DockerHub with jenkins user
       community.docker.docker_login:
-        username: devomini
-        password: Abc123@#$
+        username: {{ ansible_env.DOCKER_USERNAME }}
+        password: {{ ansible_env.DOCKER_PASSWORD }}
       become: true
       become_user: jenkins
 

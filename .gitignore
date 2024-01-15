@@ -160,3 +160,7 @@ cython_debug/
 #.idea/
 .streamer
 .vscode/
+# Ansible environment variables
+.playbook.env
+# Docker environment variables
+.docker.env

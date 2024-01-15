@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from os import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,13 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-zluujrs9^8*)sc_8t$&3r=mt%$trm$z8!p9g4j-8b^g_)k)g1u'
+SECRET_KEY = environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = environ.get('DEBUG')
 
-ALLOWED_HOSTS = ["devoreal.top", "127.0.0.1", "django-svc"]
-
+ALLOWED_HOSTS = environ.get('ALLOWED_HOSTS').split(" ")
 
 # Application definition
 DJANGO_APPS = [
@@ -139,8 +139,8 @@ STATIC_ROOT = "static/"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Celery configurations
-CELERY_BROKER_URL = 'redis://redis-svc:6379/0'
-CELERY_RESULT_BACKEND = 'redis://redis-svc:6379/0'
+CELERY_BROKER_URL = environ.get("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = environ.get("CELERY_RESULT_BACKEND")
 
 # Prometheus configurations
 PROMETHEUS_EXPORT_MIGRATIONS = False

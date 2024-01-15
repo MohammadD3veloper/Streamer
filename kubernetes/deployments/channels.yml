@@ -15,6 +15,9 @@ spec:
       containers:
       - name: channels-deploy
         image: devomini/streamer:latest
+        envFrom:
+        - secretRef:
+          name: django-secret
         command: 
           - "uvicorn"
           - "--host"

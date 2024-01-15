@@ -16,13 +16,9 @@ spec:
       containers:
       - name: postgres
         image: postgres:latest
-        env:
-          - name: POSTGRES_USER
-            value: postgres
-          - name: POSTGRES_PASSWORD
-            value: postgres_password
-          - name: PGDATA
-            value: /var/lib/postgresql/data/pgdata
+        envFrom:
+        - secretRef:
+          name: postgres-secret
         ports:
         - containerPort: 5432
           name: postgres

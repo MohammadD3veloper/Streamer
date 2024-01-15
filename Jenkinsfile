@@ -13,7 +13,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo '[*] Building docker image ...'
-                sh "docker buildx build -t streamer:latest -f docker/Dockerfile ."
+                sh "docker buildx build -t streamer:latest -f docker/Dockerfile . --env-file .docker.env"
             }
         }
         stage('Lint') {

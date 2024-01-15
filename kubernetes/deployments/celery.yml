@@ -15,6 +15,9 @@ spec:
       containers:
       - name: celery-deploy
         image: devomini/streamer:latest
+        envFrom:
+        - secretRef:
+          name: django-secret
         command: 
           - "celery"
           - "-A"
