@@ -54,4 +54,6 @@ data:
       - job_name: django
         metrics_path: /metrics
         static_configs:
-          - targets: ['django-svc:8000']
+          - targets:
+            - 'django-svc:8000'
+            - 'node-exporter:9100'
