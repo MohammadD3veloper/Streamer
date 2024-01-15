@@ -66,7 +66,6 @@ metadata:
   labels:
     app: node-exporter
   name: node-exporter
-  namespace: prometheus
 spec:
   ports:
   - name: node-exporter
